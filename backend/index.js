@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/user.route");
 const authRoutes = require("./routes/auth.route");
+// const cors = require('cors');
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -15,7 +16,6 @@ mongoose
   });
 
 const app = express();
-
 app.use(express.json());
 
 app.listen(8000, () => {
