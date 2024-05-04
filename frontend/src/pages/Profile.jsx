@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useRef } from 'react';
 import { getStorage, uploadBytesResumable, ref, getDownloadURL } from 'firebase/storage'
 import { app } from '../firebase';
-import {updateUserStart,updateUserSuccess,updateUserFailure,deleteUserStart,deleteUserSuccess,deleteUserFailure} from '../redux/user/userSlice'
+import {updateUserStart,updateUserSuccess,updateUserFailure,deleteUserStart,deleteUserSuccess,deleteUserFailure,signOut} from '../redux/user/userSlice'
 import {useDispatch} from 'react-redux'
 
 const Profile = () => {
@@ -92,6 +92,16 @@ const Profile = () => {
     }
   }
 
+  const handleSignOut=async ()=>{
+    try {
+      await fetch('/api/auth/signout');
+      dispatch(signOut());
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl font-extrabold text-center my-7'>Profile</h1>
@@ -113,7 +123,7 @@ const Profile = () => {
         <span onClick={handleDelete} className='text-red-700 cursor-pointer'>
           Delete Account
         </span>
-        <span className='text-red-700 cursor-pointer'>
+        <span onClick={handleSignOut} className='text-red-700 cursor-pointer'>
           Sign Out
         </span>
       </div>
