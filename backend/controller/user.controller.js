@@ -20,7 +20,7 @@ const updateUser = async (req, res, next) => {
       req.body.password = bcryptjs.hash(req.body.password, 10);
     }
 
-    const updateUser = await User.findByIdAndDelete(
+    const updateNewUser = await User.findByIdAndUpdate(
       req.params.id,
       {
         $set: {
@@ -32,7 +32,7 @@ const updateUser = async (req, res, next) => {
       },
       { new: true }
     );
-    const {password,...rest}=updateUser._doc;
+    const {password,...rest}=updateNewUser._doc;
     res.status(200).json(rest);
   } catch (error) {
     next(error);
