@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const userRoutes = require("./routes/user.route");
 const authRoutes = require("./routes/auth.route");
 // const cors = require('cors');
+const path = require('path')
 const cookieParser = require('cookie-parser');
 const dotenv = require("dotenv");
 dotenv.config();
@@ -16,7 +17,18 @@ mongoose
     console.log(err);
   });
 
+
+
+
+const dirname = path.resolve();
 const app = express();
+
+app.use(express.static(path.join(dirname,'/frontend/dist')));
+
+app.get('*',(req,res)=>{
+  res.sendFile(path.join(dirname,'frontend','dist','index.html'));
+})
+
 app.use(express.json());
 app.use(cookieParser());
 app.listen(8000, () => {
