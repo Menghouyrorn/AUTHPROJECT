@@ -46,7 +46,7 @@ const Profile = () => {
       <form className='flex flex-col gap-4'>
 
         <input type='file' ref={fileRef} onChange={(e) => setImage(e.target.files[0])} hidden accept='image/*' />
-        <img src={currentUser.profilePicture} onClick={() => fileRef.current.click()} alt='profile' className='h-24 w-24 self-center cursor-pointer rounded-full object-cover mt-2' />
+        <img src={formData.profilePicture || currentUser.profilePicture} onClick={() => fileRef.current.click()} alt='profile' className='h-24 w-24 self-center cursor-pointer rounded-full object-cover mt-2' />
         <p className='text-sm self-center'>
           {imageError ? (<span className='text-red-700'>
             Error uploading image file size must be less then 2 MB

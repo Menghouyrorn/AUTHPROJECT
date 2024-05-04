@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const userRoutes = require("./routes/user.route");
 const authRoutes = require("./routes/auth.route");
 // const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -17,7 +18,7 @@ mongoose
 
 const app = express();
 app.use(express.json());
-
+app.use(cookieParser());
 app.listen(8000, () => {
   console.log("Running...");
 });
